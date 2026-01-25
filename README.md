@@ -229,6 +229,19 @@ curl -X POST "http://localhost:8000/predict" \
   -d '{"ndvi":0.1,"ndbi":0.2,"row":0.5,"col":0.5}'
 ```
 
+# 🔗 Optional ONNX API Repository (Separate Deployment)
+
+For a clean “deployment-ready” setup, I also prepared a lightweight inference API repository:
+https://github.com/hanaahammad/cairo-urban-growth-onnx-api/tree/main
+
+➡️ **ONNX FastAPI Inference Repo (separate)**
+- Contains: `api.py` + `models/urban_growth_best_model.onnx`
+- Runs inference using **onnxruntime**
+- Can be deployed as an API on platforms such as Render / Railway (if available)
+
+
+
+
 ## Troubleshooting (Common Issues)
 ### 1) STAC is very slow / stuck in B1
 
@@ -260,6 +273,7 @@ pip install onnxruntime
 
 Remote rasters can be heavy.
 Use out_shape=(512, 512) in B1 to reduce download time.
+
 
 ## 🙏 Acknowledgements
 - **ML Zoomcamp / DataTalks.Club** — for the end-to-end ML training mindset (data → training → evaluation → deployment)
