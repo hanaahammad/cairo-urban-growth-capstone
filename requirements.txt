@@ -1,0 +1,15 @@
+streamlit
+pandas
+numpy
+scikit-learn
+matplotlib
+plotly
+torch
+pystac-client
+rasterio
+requests
+#onnxscript
+onnxruntime
+fastapi
+uvicorn
+pydantic
