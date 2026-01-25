@@ -1,5 +1,3 @@
-
-
 # 🏙️ Urban Growth Detection — Cairo (Capstone 2)
 
 ## 🚀 Live Application
@@ -86,6 +84,44 @@ The app provides:
 
 ---
 
+## ⏳ Important Note (STAC Download Time + Cache)
+
+This project loads **real Sentinel-2 imagery** for Cairo using a public **STAC API**.
+Depending on your internet speed and the STAC server response, the first run may take **a few minutes**.
+
+### ✅ Recommended (Fast Demo Mode)
+To make the demo smooth for reviewers, the app includes:
+
+✅ **Fast Demo Mode** (downsample rasters for faster download)  
+✅ **Caching** (download once → reuse instantly)
+
+### ✅ What reviewers should do (step-by-step)
+
+1) Open the Streamlit app  
+2) Go to **B1 — Load Cairo STAC**  
+3) Enable these checkboxes:
+
+- ✅ **Fast demo mode (downsample rasters)**
+- ✅ **Use cached results if available (faster)**
+
+4) Click: **📥 Search STAC + Compute NDVI/NDBI**
+
+⏳ Wait ~1–5 minutes (first time only)
+
+✅ After the first successful run, the app saves a cache file:
+
+- `data/cairo_stac_cache.npz`
+
+5) If you open the app again, simply click:
+
+⚡ **Load from cache now** ✅ (instant)
+
+---
+
+### ✅ Why this matters
+STAC is a real remote data source, so sometimes it can be slow.
+Using caching makes the project reproducible and easy to review.
+
 ## ▶️ Run locally
 ```bash
 pip install -r requirements.txt
@@ -128,4 +164,3 @@ cairo-urban-growth-capstone/
 ├── pages/
 ├── src/
 └── data/
-
