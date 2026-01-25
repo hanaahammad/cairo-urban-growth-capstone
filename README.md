@@ -269,7 +269,20 @@ https://github.com/hanaahammad/cairo-urban-growth-onnx-api/tree/main
 - Can be deployed as an API on platforms such as Render / Railway (if available)
 
 
+## 🐳 Run with Docker (Optional)
 
+### Build image
+```bash
+docker build -t cairo-urban-growth .
+
+## 🐳 Run with Docker (Optional)
+
+### Build image
+```bash
+docker build -t cairo-urban-growth .
+```
+Then open:
+http://localhost:8501
 
 # Troubleshooting (Common Issues)
 ### 1) STAC is very slow / stuck in B1
