@@ -1,166 +1,217 @@
-# 🏙️ Urban Growth Detection — Cairo (Capstone 2)
+# 🏙️ Cairo Urban Growth — Deep Learning Capstone (Track A + Track B)
 
-## 🚀 Live Application
-(Deploy link here after Streamlit Cloud)
+This capstone project explores **urban growth and built-up area detection** using:
+- ✅ classic remote sensing indices (NDVI / NDBI)
+- ✅ deep learning classification (PyTorch)
+- ✅ deployment-ready model export (ONNX)
+- ✅ an interactive Streamlit application
 
----
-
-## 👋 Why this project?
-This project started from my curiosity about how cities change over time.
-Urban growth is a real-world phenomenon that affects infrastructure, mobility,
-environment, and public services.
-
-The goal of this capstone is to build a **complete end-to-end ML system**
-using geospatial-style data and deep learning.
+The project is designed to be **easy to review and reproduce**, with code visible like a notebook and clear explanations in each step.
 
 ---
 
-## 🎯 Problem Statement
-We want to estimate **urban growth in Cairo** between two timestamps:
+## 🎯 Problem Statement (Simple & Clear)
 
-- **t0** → older city state
-- **t1** → newer city state
+Cities expand over time, and urban growth impacts:
+- infrastructure planning
+- transportation needs
+- housing and services
+- environmental sustainability
 
-Urban growth is detected as:
-> areas that were non-built-up at t0 but become built-up at t1
+In this project we answer:
 
----
-
-## 🧾 Dataset
-To keep the capstone reproducible and easy to evaluate, the app generates
-a synthetic geospatial grid that mimics satellite built-up intensity.
-
-The dataset includes:
-- pixel position: row, col
-- built-up mask at t0 and t1
-- intensity values
-- growth label
-
-This setup allows us to demonstrate:
-✅ loading data  
-✅ EDA  
-✅ preprocessing  
-✅ deep learning training  
-✅ hyperparameter tuning  
-✅ evaluation  
-✅ visualization and interpretation  
+✅ **Can we detect built-up (urban) areas using satellite-derived features?**  
+✅ **Can we compare two time windows and highlight new growth?**  
+✅ **Can we train a deep learning model to improve stability vs simple thresholds?**  
 
 ---
 
-## 🧠 Deep Learning Approach
-We train a small neural network classifier (PyTorch) on patch-level features:
+## 🔥 Two learning paths (A + B)
 
-Features extracted from local neighborhood (patch):
-- mean / std intensity
-- min / max intensity
-- built-up neighbor ratio
+This Streamlit app offers **two paths** to solve the problem:
 
-Label:
-- 1 = built-up
-- 0 = non-built-up
+### ✅ Track A — Generated / Synthetic Dataset (Fast & Educational)
+Track A is best to understand the machine learning pipeline quickly:
+- Generates a clean dataset instantly
+- Perfect for learning / debugging
+- Fast training and evaluation
+
+👉 Best for reviewers who want immediate results.
 
 ---
 
-## 🧪 Hyperparameter tuning (like the course)
-We perform a grid search over:
+### ✅ Track B — Real Remote Sensing Data via STAC (More realistic)
+Track B uses **real Sentinel-2 imagery** for Cairo via STAC and calculates:
+- NDVI (vegetation index)
+- NDBI (built-up index)
+- Built-up mask (baseline threshold)
+- Growth map (0 → 1 change)
 
+👉 Best for showing real-world skills: geospatial + remote sensing + ML.
+
+---
+
+## 🧭 Application Navigation (Best Practices)
+
+### ✅ Recommended order (do not skip)
+To avoid confusion, always follow the order:
+
+### ✅ Track A (Synthetic Data)
+1. **A0 / A1** → Introduction  
+2. **A2** → Generate synthetic dataset + EDA  
+3. **A3** → Train model + tuning  
+4. **A4** → Results + interpretation  
+5. **A5** → Export ONNX  
+6. **A6** → Deployment guide  
+
+---
+
+### ✅ Track B (Real STAC Data)
+1. **B0** → Introduction  
+2. **B1** → Load Cairo STAC + compute NDVI/NDBI + cache  
+3. **B2** → Results + story (built-up + growth + lost)  
+4. **B3** → Prepare tabular dataset for DL  
+5. **B4** → Deep training + hyperparameter tuning  
+6. **B5** → Export best model to ONNX  
+7. **B6** → Deployment guide (free platforms)  
+
+✅ **Important rule:**  
+**B2/B3/B4 require B1 first** (or loading the cached results).
+
+---
+
+## ⏳ STAC Waiting Time + Cache (Important for Reviewers)
+
+Track B loads real satellite imagery from a public STAC API.  
+Depending on internet speed and STAC server latency, the first run may take:
+
+⏳ **~1 to 5 minutes** (sometimes more)
+
+### ✅ Fast Demo Mode (Recommended)
+For smooth review, enable in **B1**:
+
+✅ **Fast demo mode (downsample rasters)**  
+✅ **Use cached results if available (faster)**
+
+### ✅ Cache file
+After the first successful computation, the app creates:
+
+📌 `data/cairo_stac_cache.npz`
+
+On future runs, simply click:
+
+⚡ **Load from cache now** ✅  
+➡️ results load instantly (no STAC delay)
+
+---
+
+## 🧪 Deep Learning Training (What happens in B4?)
+
+Track B training is done with a simple deep neural network (MLP) using **PyTorch**.
+
+### ✅ Why Deep Learning?
+The baseline built-up method in B1 is a threshold rule:
+
+- built-up = (NDBI > threshold) AND (NDVI < threshold)
+
+This can be unstable because:
+- haze / dust / illumination changes
+- desert or bare soil may look like built-up
+- thresholds do not generalize well
+
+✅ Deep Learning learns a more stable decision boundary from data.
+
+---
+
+## 🔁 Hyperparameter Tuning (Like the course style)
+
+In **B4**, we reproduce the tuning logic used in ML courses:
+
+We loop over:
 - learning rate (lr)
-- hidden dimension (hidden_dim)
+- hidden dimension
 - dropout
 
-The Streamlit app shows:
-- progress bar
-- experiment history table
-- best configuration selected by validation loss
+and select the best model using **F1 score**.
+
+Why F1?
+✅ Urban pixels vs non-urban pixels can be imbalanced.
 
 ---
 
-## 📊 Outputs & Visualizations
-The app provides:
-- built-up map at t0
-- built-up map at t1
-- growth map (new built-up areas)
-- growth statistics (%)
+## 📦 Export to ONNX (B5)
+
+After training, the best PyTorch model is exported to:
+
+📌 `models/urban_growth_best_model.onnx`
+
+✅ ONNX helps deployment because it is:
+- portable
+- fast to run with `onnxruntime`
+- usable outside PyTorch
+
+A metadata file is also saved:
+📌 `models/model_metadata.txt`
 
 ---
 
-## ⏳ Important Note (STAC Download Time + Cache)
+## 🚀 Deployment (Free Options)
 
-This project loads **real Sentinel-2 imagery** for Cairo using a public **STAC API**.
-Depending on your internet speed and the STAC server response, the first run may take **a few minutes**.
-
-### ✅ Recommended (Fast Demo Mode)
-To make the demo smooth for reviewers, the app includes:
-
-✅ **Fast Demo Mode** (downsample rasters for faster download)  
-✅ **Caching** (download once → reuse instantly)
-
-### ✅ What reviewers should do (step-by-step)
-
-1) Open the Streamlit app  
-2) Go to **B1 — Load Cairo STAC**  
-3) Enable these checkboxes:
-
-- ✅ **Fast demo mode (downsample rasters)**
-- ✅ **Use cached results if available (faster)**
-
-4) Click: **📥 Search STAC + Compute NDVI/NDBI**
-
-⏳ Wait ~1–5 minutes (first time only)
-
-✅ After the first successful run, the app saves a cache file:
-
-- `data/cairo_stac_cache.npz`
-
-5) If you open the app again, simply click:
-
-⚡ **Load from cache now** ✅ (instant)
+### ⭐ Option 1 — Streamlit Cloud (Recommended for capstone demo)
+✅ easiest for sharing with reviewers  
+✅ interactive UI  
+✅ deploy directly from GitHub
 
 ---
 
-### ✅ Why this matters
-STAC is a real remote data source, so sometimes it can be slow.
-Using caching makes the project reproducible and easy to review.
+### ⭐ Option 2 — Hugging Face Spaces (FastAPI deployment)
+✅ best for API deployment  
+✅ free tier  
+✅ model served as an endpoint `/predict`
 
-## ▶️ Run locally
+---
+
+## ▶️ How to Run Locally
+
+### ✅ 1) Create environment (Windows)
+
 ```bash
-pip install -r requirements.txt
-streamlit run app.py
-
-## 🧪 Environment Setup (Windows + Linux/Mac)
-
-You can run this project using either:
-
-✅ **Option A: venv (recommended, standard Python)**  
-✅ **Option B: uv (faster installs)**
-
----
-
-### ✅ Option A — Using `venv`
-
-#### 🪟 Windows (PowerShell)
-
-```powershell
-cd C:\Workspaces\cairo-urban-growth-capstone
 python -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+.venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
-
-#### Linux / 🍎 MacOS (bash)
-cd cairo-urban-growth-capstone
+```
+### ✅ 2) Create environment (Linux / macOS)
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
 pip install -r requirements.txt
 streamlit run app.py
+```
 
-
+## Project Structure
+```text
 cairo-urban-growth-capstone/
+│
 ├── app.py
 ├── requirements.txt
 ├── README.md
+│
+├── data/
+│   └── cairo_stac_cache.npz        # (created after B1 first run)
+│
+├── models/
+│   ├── urban_growth_best_model.onnx
+│   └── model_metadata.txt
+│
 ├── pages/
-├── src/
-└── data/
+│   ├── B0_📘_Intro_(STAC).py
+│   ├── B1_🌍_Load_Cairo_STAC.py
+│   ├── B2_📈_Urban_Growth_Results_(STAC).py
+│   ├── B3_🧼_Prep_(STAC).py
+│   ├── B4_🧠_Train_(STAC).py
+│   ├── B5_📦_Export_ONNX_(STAC).py
+│   └── B6_🚀_Deploy_(Free_Cloud).py
+│
+└── api.py                          # optional: FastAPI ONNX inference server
+```
