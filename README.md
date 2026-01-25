@@ -216,7 +216,22 @@ cairo-urban-growth-capstone/
 └── api.py                          
 ```
 
-# optional: FastAPI ONNX inference server
+## 🌐 Live Demo (Streamlit Cloud)
+
+✅ Streamlit App: **(https://cairo-urban-growth-capstone-4o8ojgx9vqdmax68qocnfy.streamlit.app/)
+**
+### 🧭 How to navigate the app
+Recommended order (Track B):
+1. **B0** → Intro
+2. **B1** → Load STAC + compute indices (use cache)
+3. **B2** → Results + interpretation
+4. **B3** → Prepare dataset
+5. **B4** → Train + hyperparameter tuning
+6. **B5** → Export best model to ONNX
+7. **B6** → Test ONNX predictions inside the app
+
+
+## optional: FastAPI ONNX inference server
 
 
 ```bash
@@ -229,7 +244,7 @@ curl -X POST "http://localhost:8000/predict" \
   -d '{"ndvi":0.1,"ndbi":0.2,"row":0.5,"col":0.5}'
 ```
 
-# 🔗 Optional ONNX API Repository (Separate Deployment)
+#%  Optional ONNX API Repository (Separate Deployment)
 
 For a clean “deployment-ready” setup, I also prepared a lightweight inference API repository:
 https://github.com/hanaahammad/cairo-urban-growth-onnx-api/tree/main
