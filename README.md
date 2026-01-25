@@ -213,5 +213,18 @@ cairo-urban-growth-capstone/
 │   ├── B5_📦_Export_ONNX_(STAC).py
 │   └── B6_🚀_Deploy_(Free_Cloud).py
 │
-└── api.py                          # optional: FastAPI ONNX inference server
+└── api.py                          
+```
+
+# optional: FastAPI ONNX inference server
+
+
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{"ndvi":0.1,"ndbi":0.2,"row":0.5,"col":0.5}'
+
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{"ndvi":0.1,"ndbi":0.2,"row":0.5,"col":0.5}'
 ```
