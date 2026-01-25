@@ -220,11 +220,51 @@ cairo-urban-growth-capstone/
 
 
 ```bash
-curl -X POST "http://localhost:8000/predict" \
-  -H "Content-Type: application/json" \
-  -d '{"ndvi":0.1,"ndbi":0.2,"row":0.5,"col":0.5}'
+pip install fastapi uvicorn onnxruntime numpy pydantic
+uvicorn api:app --host 0.0.0.0 --port 8000
+
 
 curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: application/json" \
   -d '{"ndvi":0.1,"ndbi":0.2,"row":0.5,"col":0.5}'
 ```
+
+# Troubleshooting (Common Issues)
+## 1) STAC is very slow / stuck in B1
+
+✅ Use these:
+
+enable Fast demo mode
+reduce time windows to 2–4 weeks
+click Load from cache after first success
+
+## 2) "No dataset found" in B3/B4
+
+✅ Required order:
+
+run B1 first → creates session data
+then go to B3 and click Save dataset for training
+then open B4
+
+## 3) ONNX export issues
+
+This project uses torch.onnx.export() directly (stable).
+If ONNXRuntime is missing:
+```bash
+pip install onnxruntime
+
+
+
+
+## 4) Raster read is slow
+
+Remote rasters can be heavy.
+Use out_shape=(512, 512) in B1 to reduce download time.
+
+# 🙏 Acknowledgements
+
+Sentinel-2 data accessed via STAC (Earth Search / AWS)
+PyTorch for deep learning
+Streamlit for the interactive application
+ONNX + ONNXRuntime for portable inference
+
