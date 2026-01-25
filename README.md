@@ -261,11 +261,9 @@ pip install onnxruntime
 Remote rasters can be heavy.
 Use out_shape=(512, 512) in B1 to reduce download time.
 
-# 🙏 Acknowledgements
-```text
-Sentinel-2 data accessed via STAC (Earth Search / AWS)
-PyTorch for deep learning
-Streamlit for the interactive application
-ONNX + ONNXRuntime for portable inference
-```
-
+## 🙏 Acknowledgements
+- **ML Zoomcamp / DataTalks.Club** — for the end-to-end ML training mindset (data → training → evaluation → deployment)
+- Sentinel-2 imagery accessed via STAC (Earth Search / AWS)
+- PyTorch for deep learning
+- Streamlit for the interactive application
+- ONNX + ONNXRuntime for portable inference
