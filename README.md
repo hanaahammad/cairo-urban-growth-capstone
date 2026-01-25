@@ -229,8 +229,8 @@ curl -X POST "http://localhost:8000/predict" \
   -d '{"ndvi":0.1,"ndbi":0.2,"row":0.5,"col":0.5}'
 ```
 
-# Troubleshooting (Common Issues)
-## 1) STAC is very slow / stuck in B1
+## Troubleshooting (Common Issues)
+### 1) STAC is very slow / stuck in B1
 
 ✅ Use these:
 
@@ -238,7 +238,7 @@ enable Fast demo mode
 reduce time windows to 2–4 weeks
 click Load from cache after first success
 
-## 2) "No dataset found" in B3/B4
+### 2) "No dataset found" in B3/B4
 
 ✅ Required order:
 
@@ -246,17 +246,17 @@ run B1 first → creates session data
 then go to B3 and click Save dataset for training
 then open B4
 
-## 3) ONNX export issues
+### 3) ONNX export issues
 
 This project uses torch.onnx.export() directly (stable).
 If ONNXRuntime is missing:
 ```bash
 pip install onnxruntime
+```
 
 
 
-
-## 4) Raster read is slow
+### 4) Raster read is slow
 
 Remote rasters can be heavy.
 Use out_shape=(512, 512) in B1 to reduce download time.
