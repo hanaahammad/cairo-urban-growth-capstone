@@ -1,5 +1,4 @@
-# cairo-urban-growth-capstone
-capstone2 for ML zoomcamp course
+
 
 # 🏙️ Urban Growth Detection — Cairo (Capstone 2)
 
