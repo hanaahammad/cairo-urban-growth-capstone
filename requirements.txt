@@ -8,8 +8,9 @@ torch
 pystac-client
 rasterio
 requests
-#onnxscript
+onnxscript
 onnxruntime
 fastapi
 uvicorn
+
 pydantic
