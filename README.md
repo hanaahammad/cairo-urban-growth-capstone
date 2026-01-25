@@ -242,7 +242,7 @@ https://github.com/hanaahammad/cairo-urban-growth-onnx-api/tree/main
 
 
 
-## Troubleshooting (Common Issues)
+# Troubleshooting (Common Issues)
 ### 1) STAC is very slow / stuck in B1
 
 ✅ Use these:
