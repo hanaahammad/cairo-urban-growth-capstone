@@ -10,7 +10,7 @@ The project is designed to be **easy to review and reproduce**, with code visibl
 
 ---
 
-## 🎯 Problem Statement (Simple & Clear)
+## 🎯 Problem Statement 
 
 Cities expand over time, and urban growth impacts:
 - infrastructure planning
